@@ -11,13 +11,17 @@
             function sprawdz() {
                 var adres = document.getElementById('adresEmail').value;
                 var wynik = document.getElementById('wynik');
-                var poprawny = false;
+                var czyJestMalpa = false;
                 //czy adres zawiera małpę
-                if(adres.search('@') > 0) poprawny = true;
-                else poprawny = false;
+                if(adres.search('@') > 0) czyJestMalpa = true;
+                
+                var czyJestKropkaPoMalpie = false;
+                for(var i=0; i<adres.length; i++) {
+                    if(adres[i] == '.' && i > adres.search('@'))
+                        czyJestKropkaPoMalpie = true;
+                }
 
-
-                if(poprawny) wynik.innerHTML = "Adres jest poprawny";    
+                if(czyJestMalpa && czyJestKropkaPoMalpie) wynik.innerHTML = "Adres jest poprawny";    
                 else wynik.innerHTML = "Adres nie jest poprawny";    
             }
         </script>
