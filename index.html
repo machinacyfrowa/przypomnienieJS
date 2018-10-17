@@ -14,14 +14,28 @@
                 var czyJestMalpa = false;
                 //czy adres zawiera małpę
                 if(adres.search('@') > 0) czyJestMalpa = true;
-                
+                //czy po małpie jest conajmniej jedna kropka
                 var czyJestKropkaPoMalpie = false;
                 for(var i=0; i<adres.length; i++) {
+                    //sprawdzamy wszystkie litery po kolei
+                    //jesli trafimy kropkę i jest dalej niż małpa
+                    //to ustawiamy warunek jako poprawny
                     if(adres[i] == '.' && i > adres.search('@'))
                         czyJestKropkaPoMalpie = true;
                 }
+                //sprawdzamy czy wszystkie znaki użyte w adresie
+                //są poprawne porównując je z ciągiem dopuszczalnych znaków
+                var wszystkieZnakiPoprawne = true;
+                var poprawneZnaki = "ABCDEFGHIJKLMNOQPRSTUWXYZabcdefghijklmnoqprstuwxyz0123456789@.-_";
+                for(var i=0; i<adres.length; i++) {
+                    if(poprawneZnaki.search(adres[i]) < 0) 
+                        wszystkieZnakiPoprawne = false;
+                }
 
-                if(czyJestMalpa && czyJestKropkaPoMalpie) wynik.innerHTML = "Adres jest poprawny";    
+                if(czyJestMalpa 
+                        && czyJestKropkaPoMalpie
+                        && wszystkieZnakiPoprawne) 
+                    wynik.innerHTML = "Adres jest poprawny";    
                 else wynik.innerHTML = "Adres nie jest poprawny";    
             }
         </script>
